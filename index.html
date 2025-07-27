@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Parallax Portfolio</title>
   <style>
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0; padding: 0;
+      box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
     }
 
-    body {
-      background: #f0f4f8;
-      color: #333;
+    html, body {
       scroll-behavior: smooth;
     }
 
-    header {
-      background: #111;
-      color: #fff;
-      padding: 20px 0;
-      text-align: center;
-      animation: fadeInDown 1s ease-in-out;
+    /* Basic styles */
+    body {
+      color: white;
     }
 
-    nav a {
+    header {
+      position: fixed;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 1000;
+    }
+
+    header a {
       color: white;
       margin: 0 15px;
       text-decoration: none;
@@ -32,165 +37,159 @@
       transition: color 0.3s;
     }
 
-    nav a:hover {
+    header a:hover {
       color: #00bcd4;
     }
 
     section {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
-      animation: fadeIn 2s ease-in-out;
+      padding: 60px 20px;
     }
 
-    .hero h1 {
-      font-size: 2.5em;
+    /* Parallax background sections */
+    .bg1, .bg2, .bg3 {
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .bg1 {
+      background-image: url('https://images.unsplash.com/photo-1517433456452-f9633a875f6f');
+    }
+
+    .bg2 {
+      background-image: url('https://images.unsplash.com/photo-1503264116251-35a269479413');
+    }
+
+    .bg3 {
+      background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085');
+    }
+
+    .content {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 12px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .content h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 1.2em;
+      color: #ddd;
+    }
+
+    .skills-bar {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .bar {
+      background: #555;
+      border-radius: 20px;
+      overflow: hidden;
       margin-bottom: 10px;
     }
 
-    .hero p {
-      font-size: 1.2em;
-      color: #555;
-    }
-
-    .skills {
-      animation: slideInLeft 1.5s ease;
-    }
-
-    .skill-bar {
-      background: #ddd;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 15px;
-    }
-
-    .skill-bar-fill {
+    .fill {
       background: #00bcd4;
       height: 20px;
       width: 0;
       animation: fillBar 2s forwards;
     }
 
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      animation: fadeInUp 1.5s ease;
-    }
-
-    .project-card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111;
-      color: #fff;
-    }
-
     /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-100px); }
-      to { opacity: 1; transform: translateX(0); }
     }
 
     @keyframes fillBar {
       to { width: 80%; }
     }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2em;
-      }
+    /* Footer */
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
     }
 
+    @media (max-width: 768px) {
+      .content h1 {
+        font-size: 2em;
+      }
+
+      .content p {
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>My Portfolio</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
   </header>
 
-  <section class="hero" id="about">
-    <h1>Hello, I'm Sharmeen</h1>
-    <p>A passionate developer creating beautiful & functional web experiences.</p>
-  </section>
-
-  <section class="skills" id="skills">
-    <h2>Skills</h2>
-    <p>HTML</p>
-    <div class="skill-bar"><div class="skill-bar-fill" style="animation-delay: 0s;"></div></div>
-
-    <p>CSS</p>
-    <div class="skill-bar"><div class="skill-bar-fill" style="animation-delay: 0.2s;"></div></div>
-
-    <p>JavaScript</p>
-    <div class="skill-bar"><div class="skill-bar-fill" style="animation-delay: 0.4s;"></div></div>
-
-    <p>React</p>
-    <div class="skill-bar"><div class="skill-bar-fill" style="animation-delay: 0.6s;"></div></div>
-  </section>
-
-  <section class="projects" id="projects">
-    <div class="project-card">
-      <h3>ToDo App</h3>
-      <p>A full-stack PERN application for task management.</p>
-    </div>
-    <div class="project-card">
-      <h3>Portfolio</h3>
-      <p>My personal responsive portfolio website with animations.</p>
-    </div>
-    <div class="project-card">
-      <h3>EcoBuddy</h3>
-      <p>A chatbot to suggest energy-saving ideas for homes & businesses.</p>
+  <!-- Hero / Home -->
+  <section class="bg1" id="home">
+    <div class="content">
+      <h1>Hello, I'm Sharmeen</h1>
+      <p>A creative web developer building clean and interactive experiences.</p>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: sharmeen@example.com</p>
-    <p>LinkedIn: linkedin.com/in/sharmeen</p>
+  <!-- About -->
+  <section class="bg2" id="about">
+    <div class="content">
+      <h1>About Me</h1>
+      <p>I’m a frontend and backend developer with a passion for elegant design and clean code. I love turning ideas into real-world applications.</p>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="bg3" id="skills">
+    <div class="content">
+      <h1>My Skills</h1>
+      <div class="skills-bar">
+        <p>HTML</p>
+        <div class="bar"><div class="fill" style="animation-delay: 0s;"></div></div>
+
+        <p>CSS</p>
+        <div class="bar"><div class="fill" style="animation-delay: 0.3s;"></div></div>
+
+        <p>JavaScript</p>
+        <div class="bar"><div class="fill" style="animation-delay: 0.6s;"></div></div>
+
+        <p>React</p>
+        <div class="bar"><div class="fill" style="animation-delay: 0.9s;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section style="background:#111;" id="contact">
+    <div class="content">
+      <h1>Contact Me</h1>
+      <p>Email: sharmeen@example.com</p>
+      <p>LinkedIn: linkedin.com/in/sharmeen</p>
+    </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 Sharmeen Gardi</p>
+    <p>&copy; 2025 Sharmeen Gardi | All Rights Reserved</p>
   </footer>
 
 </body>
